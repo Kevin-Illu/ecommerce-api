@@ -1,0 +1,24 @@
+{
+  "name": "kevin-illu/api",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "kevin-illu",
+      "email": "kevinillu97@gmail.com"
+    }
+  ],
+  "require": {
+    "slim/slim": "^4.12",
+    "slim/psr7": "^1.6",
+    "nyholm/psr7": "^1.8",
+    "nyholm/psr7-server": "^1.1",
+    "laminas/laminas-diactoros": "^3.3",
+    "slim/http": "^1.3",
+    "doctrine/dbal": "^3.7",
+    "vlucas/phpdotenv": "^5.6"
+  }
+}
