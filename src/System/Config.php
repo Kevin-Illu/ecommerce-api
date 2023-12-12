@@ -18,6 +18,7 @@ class Config {
     $db   = $_ENV['DB_DATABASE'];
     $user = $_ENV['DB_USERNAME'];
     $pass = $_ENV['DB_PASSWORD'];
+    $driver = $_ENV['DB_DRIVER'];
 
 
     $this->dbSettings = [
@@ -25,7 +26,7 @@ class Config {
       'user' => $user,
       'password' => $pass,
       'host' => $host,
-      'driver' => 'pdo_mysql'
+      'driver' => $driver
     ];
   }
  

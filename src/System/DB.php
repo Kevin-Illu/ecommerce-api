@@ -12,8 +12,7 @@ class DB {
   public function __construct(Config $config) {
     $this->connectionParameters = $config->getDbConfig();
 
-    $this->conn = DriverManager::getConnection
-    ($this->connectionParameters);
+    $this->conn = DriverManager::getConnection($this->connectionParameters);
 
     $this->queryBuilder = $this->conn->createQueryBuilder();
   }
