@@ -9,7 +9,7 @@ class DB {
   private $conn;
   private $connectionParameters;
 
-  private function __construct(Config $config) {
+  public function __construct(Config $config) {
     $this->connectionParameters = $config->getDbConfig();
 
     $this->conn = DriverManager::getConnection
