@@ -28,9 +28,7 @@ $errorMiddleware = $app->addErrorMiddleware(
 );
 
 
-# define routes
-$app->get('/api/v1/', 'App\Controllers\HomeController:index');
-
+require_once __DIR__ . '/../src/V1/Routes/index.php';
 
 
 $app->run();
