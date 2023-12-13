@@ -1,22 +1,37 @@
 <?php
-// use DI\Container;
-
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
+use App\System\Config;
+
 
 require_once __DIR__ . '/../vendor/autoload.php';
+
 
 $containerBuilder = new ContainerBuilder();
 $containerBuilder->addDefinitions(__DIR__ . '/../src/definitions.php');
 $container = $containerBuilder->build();
 
+
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+
 $app->addBodyParsingMiddleware();
+$app->addRoutingMiddleware();
+
+
+$errorSettings = $container->get(Config::class)->getErrorSettings();
+$errorMiddleware = $app->addErrorMiddleware(
+  $errorSettings['displayErrorDetails'], 
+  $errorSettings['logErrors'], 
+  $errorSettings['logErrorDetails']
+);
+
 
 # define routes
-$app->get('/', 'App\Controller\HomeController:index');
+$app->get('/api/v1/', 'App\Controllers\HomeController:index');
+
+
 
 $app->run();
 

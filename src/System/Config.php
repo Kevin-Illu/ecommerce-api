@@ -28,9 +28,19 @@ class Config {
       'host' => $host,
       'driver' => $driver
     ];
+
+    $this->errorSettings = [
+      'displayErrorDetails' => true,
+      'logErrors' => true,
+      'logErrorDetails' => true
+    ];
   }
  
   public function getDbConfig(): array {
     return $this->dbSettings;
+  }
+
+  public function getErrorSettings(): array {
+    return $this->errorSettings;
   }
 }
