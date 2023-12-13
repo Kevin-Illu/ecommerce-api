@@ -10,7 +10,10 @@ class ProductsRepository {
     $this->db = $db;
   }
 
-  public function getFeaturedProducts (int $limit) {
+  /**
+  * @return array<intr, array<string,mixed>>
+  */
+  public function getFeaturedProducts (int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
     ->from('products')
@@ -19,11 +22,13 @@ class ProductsRepository {
     ->setMaxResults($limit);
 
     $results = $queryBuilder->executeQuery()->fetchAllAssociative();
-
     return $results;
   }
 
-  public function getSpecialOffers(int $limit) {
+  /*
+  * @return array<int,array<string,mixed>>
+  */
+  public function getSpecialOffers(int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, MSRP')
     ->from('products')
@@ -35,17 +40,26 @@ class ProductsRepository {
     return $results;
   }
 
-  public function getNewArrivals(int $limit) {
+  /*
+  * @return array<int,array<string,mixed>>
+  */
+  public function getNewArrivals(int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
     ->from('products')
     ->orderBy('productCode', 'DESC')
     ->setMaxResults($limit);
 
-    return $queryBuilder->executeQuery()->fetchAllAssociative();
+    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+
+    return $results;
   }
 
-  public function getAllProducts (int $limit) {
+
+  /*
+  * @return array<int,array<string,mixed>>
+  */
+  public function getAllProducts (int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
     ->from('products')
@@ -55,7 +69,10 @@ class ProductsRepository {
     return $results;
   }
 
-  public function getProductByCode (string $code) {
+  /*
+  * @return array<int,array<string,mixed>>
+  */
+  public function getProductByCode (string $code): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
     ->from('products')
