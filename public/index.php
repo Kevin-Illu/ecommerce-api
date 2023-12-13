@@ -1,12 +1,8 @@
 <?php
 // use DI\Container;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
-
-use App\Controller\HomeController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -17,15 +13,10 @@ $container = $containerBuilder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+$app->addBodyParsingMiddleware();
 
-$app->get('/', function (Request $request, Response $response, $args) use ($container) {
-  $homeController = $container->get(HomeController::class);
-  return $homeController->index($request, $response, $args);
-});
-
-$app->get('/employees', function (Request $request, Response $response, $args) {
-  $response->getBody()->write("employees");
-  return $response;
-});
+# define routes
+$app->get('/', 'App\Controller\HomeController:index');
 
 $app->run();
+
