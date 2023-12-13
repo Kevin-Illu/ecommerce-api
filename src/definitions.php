@@ -4,7 +4,6 @@ namespace App;
 use function DI\create;
 use function DI\get;
 
-
 use App\System\Config;
 use App\System\DB;
 
@@ -35,4 +34,5 @@ return [
   ProductsController::class => create()
     ->constructor(get(ProductsService::class)),
 ];
+
 

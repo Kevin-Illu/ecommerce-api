@@ -19,21 +19,29 @@ class ProductsController implements ControllerInterface {
     return $response->withHeader('Content-Type', 'application/json');
   }
 
-  public function getSpecialOffers(Request $request, Response $response, $args): Response {
+  public function getSpecialOffers(Request $request, Response $response): Response {
     $payload = $this->productsService->getSpecialOffers();
     $response->getBody()->write(json_encode($payload));
     return $response->withHeader('Content-Type', 'application/json');
   }
 
-  public function getNewArrivals(Request $request, Response $response, $args): Response {
+  public function getNewArrivals(Request $request, Response $response): Response {
     $payload = $this->productsService->getNewArrivals();
     $response->getBody()->write(json_encode($payload));
     return $response->withHeader('Content-Type', 'application/json');
   }
 
-  public function getFeaturedProducts(Request $request, Response $response, $args): Response {
+  public function getFeaturedProducts(Request $request, Response $response): Response {
     $payload = $this->productsService->getFeaturedProducts();
     $response->getBody()->write(json_encode($payload));
+    return $response->withHeader('Content-Type', 'application/json');
+  }
+
+  public function getProductByCode(Request $request, Response $response, $args): Response {
+    $id = $args['code'];
+    $payload = $this->productsService->getProductByCode($id);
+    $response->getBody()->write(json_encode($payload));
+
     return $response->withHeader('Content-Type', 'application/json');
   }
 }

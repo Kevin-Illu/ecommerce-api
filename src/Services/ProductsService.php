@@ -25,5 +25,9 @@ class ProductsService {
   public function getAllProducts(int $limit = 50): array {
     return $this->repo->getAllProducts($limit);
   }
+
+  public function getProductByCode(string $code):array {
+    return $this->repo->getProductByCode($code);
+  }
 }
 

@@ -1,16 +1,16 @@
-<?php
+<?phpcode
 namespace App\Repositories;
 
 use App\System\DB;
 
 class ProductsRepository {
-  private $db;
+  private DB $db;
 
   public function __construct(DB $db) {
     $this->db = $db;
   }
 
-  public function getFeaturedProducts (int $limit): array {
+  public function getFeaturedProducts (int $limit) {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
     ->from('products')
@@ -18,12 +18,12 @@ class ProductsRepository {
     ->setFirstResult($limit)
     ->setMaxResults($limit);
 
-    $results = $queryBuilder->executeQuery()->fetchAll();
+    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
 
     return $results;
   }
 
-  public function getSpecialOffers(int $limit): array {
+  public function getSpecialOffers(int $limit) {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, MSRP')
     ->from('products')
@@ -31,27 +31,39 @@ class ProductsRepository {
     ->orderBy('RAND()')
     ->setMaxResults($limit);
 
-    $results = $queryBuilder->executeQuery()->fetchAll();
+    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
     return $results;
   }
 
-  public function getNewArrivals(int $limit): array {
+  public function getNewArrivals(int $limit) {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
     ->from('products')
     ->orderBy('productCode', 'DESC')
     ->setMaxResults($limit);
 
-    return $queryBuilder->executeQuery()->fetchAll();
+    return $queryBuilder->executeQuery()->fetchAllAssociative();
   }
 
-  public function getAllProducts (int $limit): array {
+  public function getAllProducts (int $limit) {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
     ->from('products')
     ->orderBy('buyPrice', 'ASC');
 
-    $results = $queryBuilder->executeQuery()->fetchAll();
+    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+    return $results;
+  }
+
+  public function getProductByCode (string $code) {
+    $queryBuilder = $this->db->getQueryBuilder();
+    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
+    ->from('products')
+    ->where('productCode = ?')
+    ->setParameter(0, $code);
+
+    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+
     return $results;
   }
 }
