@@ -28,7 +28,8 @@ $errorMiddleware = $app->addErrorMiddleware(
 );
 
 
-require_once __DIR__ . '/../src/V1/Routes/index.php';
+require_once __DIR__ . '/../src/V1/Routes/Index.php';
+require_once __DIR__ . '/../src/V1/Routes/ProductsRouter.php';
 
 
 $app->run();

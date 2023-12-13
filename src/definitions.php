@@ -9,11 +9,12 @@ use App\System\Config;
 use App\System\DB;
 
 # repositories
-use App\Repositories\ProductRepository;
+use App\Repositories\ProductsRepository;
 # services
-use App\Services\ProductService;
+use App\Services\ProductsService;
 # controllers
 use App\Controllers\HomeController;
+use App\Controllers\ProductsController;
 
 return [
   # config
@@ -22,14 +23,16 @@ return [
         ->constructor(get(Config::class)),
 
   # repositories
-  ProductRepository::class => create()
+  ProductsRepository::class => create()
     ->constructor(get(DB::class)),
 
   # services
-  ProductService::class => create()
-    ->constructor(get(ProductRepository::class)),
+  ProductsService::class => create()
+    ->constructor(get(ProductsRepository::class)),
 
   # controllers
   HomeController::class => create(),
+  ProductsController::class => create()
+    ->constructor(get(ProductsService::class)),
 ];
 
