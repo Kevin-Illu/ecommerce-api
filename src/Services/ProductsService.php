@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Repositories\ProductsRepository;
 
 class ProductsService {
-  private $repo;
+  private ProductsRepository $repo;
 
   public function __construct(ProductsRepository $repo) {
     $this->repo = $repo;

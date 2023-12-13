@@ -1,4 +1,4 @@
-<?phpcode
+<?php
 namespace App\Repositories;
 
 use App\System\DB;

@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Services\ProductsService;
 
 class ProductsController implements ControllerInterface {
-  private $productsService;
+  private ProductsService $productsService;
 
   public function __construct(ProductsService $productsService) {
     $this->productsService = $productsService;
