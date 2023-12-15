@@ -38,12 +38,13 @@ A continuación, se describen las tareas por hacer:
 - [ ] Agregar autenticación
 - [ ] Agregar tokens JSON Web
 - [ ] Finalizar la ruta de productos
-  - [x] get all products
   - [x] get product by code
-  - [x] get featued products
   - [x] add new product
-  - [ ] delete product by code
-  - [ ] edit product by code
+  - [x] edit product by code
+  - [x] delete product by code
+  - [x] get all products
+  - [x] get featued products
+  - [ ] protejer estas rutas con tokens
 - [ ] Crear la ruta de clientes
 - [ ] Agregar usuarios y roles
 - [ ] Agregar pagos

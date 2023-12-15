@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Repositories\ProductsRepository;
-
 /**
  * Class ProductsService
  * @package App\Services
@@ -49,6 +48,16 @@ class ProductsService {
    */
   public function getProductByCode(string $code): array {
     return $this->repo->getProductByCode($code);
+  }
+
+  /**
+  * delete a product by its code.
+  *
+  * @param string $code Product code.
+  * @return int
+  */
+  public function deleteProduct(string $code): int {
+    return $this->repo->deleteProduct($code);
   }
 
   /**

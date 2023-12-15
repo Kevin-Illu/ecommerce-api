@@ -78,6 +78,58 @@ class ProductsRepository {
   }
 
   /**
+   * Get a product by its code.
+   *
+   * @param string $code Product code.
+   * @return array Associative array representing the product.
+   */
+  public function getProductByCode (string $code): array {
+    $queryBuilder = $this->db->getQueryBuilder();
+    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
+    ->from('products')
+    ->where('productCode = ?')
+    ->setParameter(0, $code);
+
+    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+
+    return $results;
+  }
+
+
+  /**
+  * delete a prodcut by its code.
+  *
+  * @param int $code Product code.
+  * @return int
+  */
+  public function deleteProduct(string $code): int {
+    $queryBuilder = $this->db->getQueryBuilder();
+    $queryBuilder->delete('products')
+    ->where('productCode = ?')
+    ->setParameter(0, $code);
+
+    $result = $queryBuilder->executeStatement();
+
+    return $result;
+  }
+
+   /**
+   * Get all products from the database.
+   *
+   * @param int $limit The maximum number of products to retrieve.
+   * @return array Associative array representing all products.
+   */
+  public function getAllProducts (int $limit): array {
+    $queryBuilder = $this->db->getQueryBuilder();
+    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
+    ->from('products')
+    ->orderBy('buyPrice', 'ASC');
+
+    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+    return $results;
+  }
+
+  /**
    * Get a specified number of featured products.
    *
    * @param int $limit The maximum number of featured products to retrieve.
@@ -125,40 +177,6 @@ class ProductsRepository {
     ->from('products')
     ->orderBy('productCode', 'DESC')
     ->setMaxResults($limit);
-
-    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
-
-    return $results;
-  }
-
-   /**
-   * Get all products from the database.
-   *
-   * @param int $limit The maximum number of products to retrieve.
-   * @return array Associative array representing all products.
-   */
-  public function getAllProducts (int $limit): array {
-    $queryBuilder = $this->db->getQueryBuilder();
-    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
-    ->from('products')
-    ->orderBy('buyPrice', 'ASC');
-
-    $results = $queryBuilder->executeQuery()->fetchAllAssociative();
-    return $results;
-  }
-
-  /**
-   * Get a product by its code.
-   *
-   * @param string $code Product code.
-   * @return array Associative array representing the product.
-   */
-  public function getProductByCode (string $code): array {
-    $queryBuilder = $this->db->getQueryBuilder();
-    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
-    ->from('products')
-    ->where('productCode = ?')
-    ->setParameter(0, $code);
 
     $results = $queryBuilder->executeQuery()->fetchAllAssociative();
 

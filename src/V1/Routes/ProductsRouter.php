@@ -12,10 +12,6 @@ $app->get('/api/v1/products', ProductsController::class .':index');
 # get product by code
 $app->get('/api/v1/product/{code}', ProductsController::class . ':getProduct');
 
-# add new product
-$app->post('/api/v1/product/add', ProductsController::class . ':addNewProduct')
-  ->add($validateAddProductData);
-
 # update product
 $app->put('/api/v1/product/{code}', ProductsController::class . ':updateProduct')
   ->add($validateUpdateProductData);
@@ -23,6 +19,10 @@ $app->put('/api/v1/product/{code}', ProductsController::class . ':updateProduct'
 # delete product
 $app->delete('/api/v1/product/{code}', ProductsController::class . ':deleteProduct');
 
-# get all featured products
+# add new product
+$app->post('/api/v1/product/add', ProductsController::class . ':addNewProduct')
+  ->add($validateAddProductData);
+
+# get featured products
 $app->get('/api/v1/products/featured', ProductsController::class . ':getFeaturedProducts');
 
