@@ -10,7 +10,13 @@ class ProductsRepository {
     $this->db = $db;
   }
 
-  public function addNewProduct($product) {
+  /**
+   * Add a new product to the database.
+   *
+   * @param array $product Associative array representing product details.
+   * @return array Associative array representing the added product.
+   */
+  public function addNewProduct($product): array|bool {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->insert('products')
     ->setValue('productCode', '?')
@@ -37,7 +43,13 @@ class ProductsRepository {
     return $results;
   }
 
-  public function updateProduct($product) {
+  /**
+   * Update an existing product in the database.
+   *
+   * @param array $product Associative array representing product details.
+   * @return int Number of affected rows.
+   */
+  public function updateProduct($product): int {
     $queryBuilder = $this->db->getQueryBuilder();
 
     $queryBuilder->update('products')
@@ -66,8 +78,11 @@ class ProductsRepository {
   }
 
   /**
-  * @return array<intr, array<string,mixed>>
-  */
+   * Get a specified number of featured products.
+   *
+   * @param int $limit The maximum number of featured products to retrieve.
+   * @return array Associative array representing featured products.
+   */
   public function getFeaturedProducts (int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
@@ -80,9 +95,12 @@ class ProductsRepository {
     return $results;
   }
 
-  /*
-  * @return array<int,array<string,mixed>>
-  */
+  /**
+   * Get a specified number of special offer products.
+   *
+   * @param int $limit The maximum number of special offer products to retrieve.
+   * @return array Associative array representing special offer products.
+   */
   public function getSpecialOffers(int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
@@ -95,9 +113,12 @@ class ProductsRepository {
     return $results;
   }
 
-  /*
-  * @return array<int,array<string,mixed>>
-  */
+  /**
+   * Get a specified number of new arrival products.
+   *
+   * @param int $limit The maximum number of new arrival products to retrieve.
+   * @return array Associative array representing new arrival products.
+   */
   public function getNewArrivals(int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
@@ -110,10 +131,12 @@ class ProductsRepository {
     return $results;
   }
 
-
-  /*
-  * @return array<int,array<string,mixed>>
-  */
+   /**
+   * Get all products from the database.
+   *
+   * @param int $limit The maximum number of products to retrieve.
+   * @return array Associative array representing all products.
+   */
   public function getAllProducts (int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
@@ -124,9 +147,12 @@ class ProductsRepository {
     return $results;
   }
 
-  /*
-  * @return array<int,array<string,mixed>>
-  */
+  /**
+   * Get a product by its code.
+   *
+   * @param string $code Product code.
+   * @return array Associative array representing the product.
+   */
   public function getProductByCode (string $code): array {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
