@@ -27,7 +27,7 @@ class ProductsController implements ControllerInterface {
     return $response->withHeader('Content-Type', 'application/json');
   }
 
-  public function addNewProduct(Request $request, Response $response, $args): Response {
+  public function addNewProduct(Request $request, Response $response): Response {
     $parsedBody = $request->getParsedBody();
     $product = [
       "productCode" => $parsedBody['productCode'],
@@ -47,9 +47,22 @@ class ProductsController implements ControllerInterface {
     return $response->withHeader('Content-Type', 'application/json');
   }
 
-  public function updateNewProduct(Request $request, Response $response, $args): array {
-    $code = $args['code'];
-    $payload = ['status' => 'not implemented'];
+  public function updateProduct(Request $request, Response $response, $args): Response  {
+    $productCode = $args['code'];
+    $parsedBody = $request->getParsedBody();
+    $product = [
+      "productCode" => $productCode,
+      "productName" => $parsedBody['productName'],
+      "productDescription" => $parsedBody['productDescription'],
+      "buyPrice" => $parsedBody['buyPrice'],
+      "quantityInStock" => $parsedBody['quantityInStock'],
+      "productScale" => $parsedBody['productScale'],
+      "productVendor" => $parsedBody['productVendor'],
+      "productLine" => $parsedBody['productLine'],
+      "MSRP" => $parsedBody['MSRP'],
+    ];
+
+    $payload = $this->productsService->updateProduct($product);
     $response->getBody()->write(json_encode($payload));
 
     return $response->withHeader('Content-Type', 'application/json');

@@ -14,10 +14,11 @@ $app->get('/api/v1/product/{code}', ProductsController::class . ':getProduct');
 
 # add new product
 $app->post('/api/v1/product/add', ProductsController::class . ':addNewProduct')
-  ->add($ProductDataValidator);
+  ->add($validateAddProductData);
 
 # update product
-$app->put('/api/v1/product/{code}', ProductsController::class . ':updateProduct');
+$app->put('/api/v1/product/{code}', ProductsController::class . ':updateProduct')
+  ->add($validateUpdateProductData);
 
 # delete product
 $app->delete('/api/v1/product/{code}', ProductsController::class . ':deleteProduct');

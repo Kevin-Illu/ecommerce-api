@@ -36,7 +36,34 @@ class ProductsRepository {
 
     return $results;
   }
-  
+
+  public function updateProduct($product) {
+    $queryBuilder = $this->db->getQueryBuilder();
+
+    $queryBuilder->update('products')
+    ->set('productName', '?')
+    ->set('productDescription', '?')
+    ->set('buyPrice', '?')
+    ->set('quantityInStock', '?')
+    ->set('productScale', '?')
+    ->set('productVendor', '?')
+    ->set('productLine', '?')
+    ->set('MSRP', '?')
+    ->where('productCode = ?')
+    ->setParameter(1, $product['productName'])
+    ->setParameter(2, $product['productDescription'])
+    ->setParameter(3, $product['buyPrice'])
+    ->setParameter(4, $product['quantityInStock'])
+    ->setParameter(5, $product['productScale'])
+    ->setParameter(6, $product['productVendor'])
+    ->setParameter(7, $product['productLine'])
+    ->setParameter(8, $product['MSRP'])
+    ->setParameter(9, $product['productCode']);
+
+    $result = $queryBuilder->executeStatement();
+
+    return $result;
+  }
 
   /**
   * @return array<intr, array<string,mixed>>
