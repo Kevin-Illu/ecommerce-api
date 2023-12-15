@@ -45,6 +45,8 @@ A continuación, se describen las tareas por hacer:
   - [x] get all products
   - [x] get featued products
   - [ ] protejer estas rutas con tokens
+  - [ ] agregar paginacion
+  - [ ] habilitar la opcion de limite en las solicitudes
 - [ ] Crear la ruta de clientes
 - [ ] Agregar usuarios y roles
 - [ ] Agregar pagos
