@@ -20,16 +20,33 @@ Tecnologías utilizadas:
 
 ## Rutas
 
-- **URL base `/api/v1/`**
+A continuación se detallan las rutas disponibles en esta API Rest.
 
-- **Products `/products/`**  
-  Lista todos los productos (límite 10).
+- Obtener todos los productos  
+  Ruta: GET /api/v1/products  
+  Descripción: Obtiene todos los productos.
 
-- **Featured `/products/featured`**  
-  Lista los productos destacados (límite 10).
+- Obtener un producto por código  
+  Ruta: GET /api/v1/product/{code}  
+  Descripción: Obtiene un producto específico mediante su código.
 
-- **Product by Code `/products/code`**  
-  Optiene un producto en base a us Codigo de producto.
+- Actualizar un producto
+  Ruta: PUT /api/v1/product/{code}  
+   Descripción: Actualiza un producto existente.
+  Se debe proporcionar el código del producto a actualizar.
+
+- Eliminar un producto  
+   Ruta: DELETE /api/v1/product/{code}  
+   Descripción: Elimina un producto existente. Se debe proporcionar
+  el código del producto a eliminar.
+
+- Agregar un nuevo producto  
+  Ruta: POST /api/v1/product/add  
+  Descripción: Agrega un nuevo producto a la base de datos.
+
+- Obtener productos destacados  
+  Ruta: GET /api/v1/products/featured
+  Descripción: Obtiene una lista de productos destacados.
 
 ## Pendientes
 
