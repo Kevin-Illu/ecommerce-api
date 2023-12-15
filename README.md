@@ -2,6 +2,14 @@
 
 Este proyecto tiene como propósito el aprendizaje de PHP y el desarrollo del backend.
 
+## Ejecutar Projecto
+
+para ejecutar el projecto utiliza el siguiente comando
+
+```shell
+php -S localhost: 3000 -t public
+```
+
 Tecnologías utilizadas:
 
 - MySQL
@@ -14,14 +22,14 @@ Tecnologías utilizadas:
 
 - **URL base `/api/v1/`**
 
-- **Productos `/products/`**  
+- **Products `/products/`**  
   Lista todos los productos (límite 10).
 
-- **Productos destacados `/products/featured`**  
+- **Featured `/products/featured`**  
   Lista los productos destacados (límite 10).
 
-- **Producto por código `/products/code`**  
-  Retorna el producto con el ID.
+- **Product by Code `/products/code`**  
+  Optiene un producto en base a us Codigo de producto.
 
 ## Pendientes
 
@@ -30,7 +38,15 @@ A continuación, se describen las tareas por hacer:
 - [ ] Agregar autenticación
 - [ ] Agregar tokens JSON Web
 - [ ] Finalizar la ruta de productos
+  - [x] get all products
+  - [x] get product by code
+  - [x] get featued products
+  - [x] add new product
+  - [ ] delete product by code
+  - [ ] edit product by code
 - [ ] Crear la ruta de clientes
-- [ ] Agregar funcionalidad de usuarios
+- [ ] Agregar usuarios y roles
 - [ ] Agregar pagos
-- [ ] Crear pruebas
+- [ ] Test unitarios y de integracion
+- [ ] Logs
+- [ ] Documentacion Automatica

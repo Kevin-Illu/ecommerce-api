@@ -14,6 +14,11 @@ class ProductsService {
     return $this->repo->getFeaturedProducts($limit);
   }
 
+  public function addNewProduct($product) {
+    return $this->repo->addNewProduct($product);
+  }
+
+  // product features
   public function getSpecialOffers(int $limit = 10): array {
     return $this->repo->getSpecialOffers($limit);
   }

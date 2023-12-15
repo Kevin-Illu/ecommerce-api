@@ -10,12 +10,40 @@ class ProductsRepository {
     $this->db = $db;
   }
 
+  public function addNewProduct($product) {
+    $queryBuilder = $this->db->getQueryBuilder();
+    $queryBuilder->insert('products')
+    ->setValue('productCode', '?')
+    ->setValue('productName', '?')
+    ->setValue('productDescription', '?')
+    ->setValue('buyPrice', '?')
+    ->setValue('quantityInStock', '?')
+    ->setValue('productScale', '?')
+    ->setValue('productVendor', '?')
+    ->setValue('productLine', '?')
+    ->setValue('MSRP', '?')
+    ->setParameter(0, $product['productCode'])
+    ->setParameter(1, $product['productName'])
+    ->setParameter(2, $product['productDescription'])
+    ->setParameter(3, $product['buyPrice'])
+    ->setParameter(4, $product['quantityInStock'])
+    ->setParameter(5, $product['productScale'])
+    ->setParameter(6, $product['productVendor'])
+    ->setParameter(7, $product['productLine'])
+    ->setParameter(8, $product['MSRP']);
+
+    $results = $queryBuilder->executeQuery()->fetchAssociative();
+
+    return $results;
+  }
+  
+
   /**
   * @return array<intr, array<string,mixed>>
   */
   public function getFeaturedProducts (int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
-    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
+    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
     ->from('products')
     ->orderBy('RAND()')
     ->setFirstResult($limit)
@@ -30,7 +58,7 @@ class ProductsRepository {
   */
   public function getSpecialOffers(int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
-    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, MSRP')
+    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
     ->from('products')
     ->where('MSRP - buyPrice > 0')
     ->orderBy('RAND()')
@@ -45,7 +73,7 @@ class ProductsRepository {
   */
   public function getNewArrivals(int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
-    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
+    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
     ->from('products')
     ->orderBy('productCode', 'DESC')
     ->setMaxResults($limit);
@@ -61,7 +89,7 @@ class ProductsRepository {
   */
   public function getAllProducts (int $limit): array {
     $queryBuilder = $this->db->getQueryBuilder();
-    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
+    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
     ->from('products')
     ->orderBy('buyPrice', 'ASC');
 
@@ -74,7 +102,7 @@ class ProductsRepository {
   */
   public function getProductByCode (string $code): array {
     $queryBuilder = $this->db->getQueryBuilder();
-    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor')
+    $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
     ->from('products')
     ->where('productCode = ?')
     ->setParameter(0, $code);
