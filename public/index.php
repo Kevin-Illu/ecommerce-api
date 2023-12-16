@@ -1,8 +1,9 @@
 <?php
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
-use App\System\Config;
 
+use App\System\Config;
+use App\Middlewares\Authentication;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -27,6 +28,9 @@ $errorMiddleware = $app->addErrorMiddleware(
   $errorSettings['logErrorDetails']
 );
 
+
+# authentication middleware
+$authMiddleware = $container->get(Authentication::class);
 
 require_once __DIR__ . '/../src/V1/Routes/Index.php';
 require_once __DIR__ . '/../src/V1/Routes/ProductsRouter.php';

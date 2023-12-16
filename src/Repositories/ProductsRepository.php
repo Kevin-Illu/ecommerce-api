@@ -62,15 +62,15 @@ class ProductsRepository {
     ->set('productLine', '?')
     ->set('MSRP', '?')
     ->where('productCode = ?')
-    ->setParameter(1, $product['productName'])
-    ->setParameter(2, $product['productDescription'])
-    ->setParameter(3, $product['buyPrice'])
-    ->setParameter(4, $product['quantityInStock'])
-    ->setParameter(5, $product['productScale'])
-    ->setParameter(6, $product['productVendor'])
-    ->setParameter(7, $product['productLine'])
-    ->setParameter(8, $product['MSRP'])
-    ->setParameter(9, $product['productCode']);
+    ->setParameter(0, $product['productName'])
+    ->setParameter(1, $product['productDescription'])
+    ->setParameter(2, $product['buyPrice'])
+    ->setParameter(3, $product['quantityInStock'])
+    ->setParameter(4, $product['productScale'])
+    ->setParameter(5, $product['productVendor'])
+    ->setParameter(6, $product['productLine'])
+    ->setParameter(7, $product['MSRP'])
+    ->setParameter(8, $product['productCode']);
 
     $result = $queryBuilder->executeStatement();
 

@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Middlewares\Authentication;
 use function DI\create;
 use function DI\get;
 
@@ -20,6 +21,10 @@ return [
   Config::class => create(),
   DB::class => create()
         ->constructor(get(Config::class)),
+
+  # Authentication Middleware
+  Authentication::class => create()
+    ->constructor(get(DB::class)),
 
   # repositories
   ProductsRepository::class => create()

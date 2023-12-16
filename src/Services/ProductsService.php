@@ -26,7 +26,7 @@ class ProductsService {
    * @param array $product Associative array representing product details.
    * @return array Associative array representing the added product.
    */
-  public function addNewProduct(array $product): array {
+  public function addNewProduct(array $product): array|bool {
     return $this->repo->addNewProduct($product);
   }
 

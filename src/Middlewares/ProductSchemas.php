@@ -1,12 +1,7 @@
 <?php
 namespace App\Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
-
-require_once __DIR__ . '/validateSchema.php';
-
-$addProductSchema = <<<'JSON'
+$addSchema = <<<'JSON'
 {
   "type": "object",
   "properties": {
@@ -34,7 +29,7 @@ $addProductSchema = <<<'JSON'
 }
 JSON;
 
-$updateProductSchema = <<<'JSON'
+$updateSchema = <<<'JSON'
 {
   "type": "object",
   "properties": {
@@ -48,7 +43,6 @@ $updateProductSchema = <<<'JSON'
     "MSRP": { "type": "string" }
   },
   "required": [
-    "productCode",
     "productName",
     "productDescription",
     "buyPrice",
@@ -61,12 +55,7 @@ $updateProductSchema = <<<'JSON'
 }
 JSON;
 
-$validateAddProductData = function (Request $request, RequestHandler $handler) use ($validateSchema, $addProductSchema) {
-    return $validateSchema($request, $handler, $addProductSchema);
-};
-
-$validateUpdateProductData = function (Request $request, RequestHandler $handler) use ($validateSchema, $updateProductSchema) {
-    return $validateSchema($request, $handler, $updateProductSchema);
-};
-
-
+$schemas = [
+  "add" => $addSchema,
+  "update" => $updateSchema
+];
