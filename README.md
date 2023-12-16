@@ -52,7 +52,7 @@ A continuación se detallan las rutas disponibles en esta API Rest.
 
 A continuación, se describen las tareas por hacer:
 
-- [ ] Agregar autenticación
+- [x] Agregar autenticación
 - [ ] Agregar tokens JSON Web
 - [ ] Finalizar la ruta de productos
   - [x] get product by code
@@ -61,11 +61,12 @@ A continuación, se describen las tareas por hacer:
   - [x] delete product by code
   - [x] get all products
   - [x] get featued products
-  - [ ] protejer estas rutas con tokens
-  - [ ] agregar paginacion
+  - [x] protejer estas rutas con tokens
   - [ ] habilitar la opcion de limite en las solicitudes
 - [ ] Crear la ruta de clientes
 - [ ] Agregar usuarios y roles
+  - [x] agregar usuarios
+  - [ ] agregar roles
 - [ ] Agregar pagos
 - [ ] Test unitarios y de integracion
 - [ ] Logs
