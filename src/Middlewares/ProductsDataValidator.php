@@ -17,3 +17,4 @@ $validateUpdateProductData = function (Request $request, RequestHandler $handler
 $validateAddProductData = function (Request $request, RequestHandler $handler) use ($updateSchema, $middleware) {
   return $middleware->validateSchema($request, $handler, $updateSchema);
 };
+

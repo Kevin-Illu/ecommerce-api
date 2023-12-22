@@ -5,7 +5,13 @@ use Slim\Factory\AppFactory;
 use App\System\Config;
 use App\Middlewares\Authentication;
 
+use Dotenv\Dotenv;
+
 require_once __DIR__ . '/../vendor/autoload.php';
+
+
+$dotenv = Dotenv::createImmutable(__DIR__."/../");
+$dotenv->load();
 
 
 $containerBuilder = new ContainerBuilder();
@@ -31,6 +37,7 @@ $errorMiddleware = $app->addErrorMiddleware(
 
 # authentication middleware
 $authMiddleware = $container->get(Authentication::class);
+
 
 require_once __DIR__ . '/../src/V1/Routes/Index.php';
 require_once __DIR__ . '/../src/V1/Routes/ProductsRouter.php';

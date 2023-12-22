@@ -1,7 +1,9 @@
 <?php
 namespace App;
 
-use App\Middlewares\Authentication;
+use App\Controllers\AuthController;
+use App\Repositories\UserRepository;
+use App\Services\AuthService;
 use function DI\create;
 use function DI\get;
 
@@ -22,22 +24,24 @@ return [
   DB::class => create()
         ->constructor(get(Config::class)),
 
-  # Authentication Middleware
-  Authentication::class => create()
-    ->constructor(get(DB::class)),
-
   # repositories
   ProductsRepository::class => create()
+    ->constructor(get(DB::class)),
+  UserRepository::class => create()
     ->constructor(get(DB::class)),
 
   # services
   ProductsService::class => create()
     ->constructor(get(ProductsRepository::class)),
+  AuthService::class => create()
+    ->constructor(get(UserRepository::class)),
 
   # controllers
   HomeController::class => create(),
   ProductsController::class => create()
     ->constructor(get(ProductsService::class)),
+  AuthController::class => create()
+    ->constructor(get(AuthService::class)),
 ];
 
 
