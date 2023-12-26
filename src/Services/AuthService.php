@@ -22,15 +22,22 @@ class AuthService {
   public function authenticateUser($email, $password) {
     $result = $this->repo->getPasswordByEmail($email);
 
-    if (!$result)
-    {
-      return false;
+    if (!$result) {
+      return [
+        "result" => false,
+        "msg" => "Authentication failed"
+      ];
     }
 
     $hashedPassword = $result['password'];
+    $isPasswordValid = password_verify($password, $hashedPassword);
 
-    return password_verify($password, $hashedPassword);
+    return [
+      "result" => $isPasswordValid,
+      "msg" => $isPasswordValid ? "Authentication successful" : "Authentication failed"
+    ];
   }
+
 
   public function generateToken($data) {
     JwtAuth::setKey($_ENV['JWT_KEY']);

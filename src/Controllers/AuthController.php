@@ -19,22 +19,24 @@ class AuthController implements ControllerInterface {
     $userEmail = $parsedBody['email'];
     $password = $parsedBody['password'];
 
-    $token = null;
     $data = [
-        "email" => $userEmail,
-        "password" => $password
+      "email" => $userEmail,
+      "password" => $password
     ];
 
-    $isUserAuthenticated = $this->service->authenticateUser($userEmail, $password);
+    $authenticationResponse = $this->service->authenticateUser($userEmail, $password);
 
-    if ($isUserAuthenticated)
-    {
+    $message = $authenticationResponse["msg"];
+    $isUserAuthenticated = $authenticationResponse["result"];
+    $authenticationToken = null;
+
+    if ($isUserAuthenticated) {
       $authenticationToken = $this->service->generateToken($data);
     }
 
     $responseBody = [
-        "email" => $userEmail,
-        "token" => $authenticationToken
+      "msg" => $message,
+      "result" => $authenticationToken
     ];
 
     $response->getBody()->write(json_encode($responseBody));
