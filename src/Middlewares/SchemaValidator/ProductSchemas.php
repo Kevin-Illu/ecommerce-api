@@ -1,5 +1,5 @@
 <?php
-namespace App\Middlewares;
+namespace App\Middlewares\SchemaValidator;
 
 $addSchema = <<<'JSON'
 {

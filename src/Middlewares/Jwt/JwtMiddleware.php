@@ -1,10 +1,10 @@
 <?php
-namespace App\Middlewares;
+namespace App\Middlewares\Jwt;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
-use App\Middlewares\JwtAuth;
+use App\Middlewares\Jwt\JwtManager;
 use Slim\Psr7\Response as SlimResponse;
 
 class JwtMiddleware
@@ -37,8 +37,8 @@ class JwtMiddleware
     // Extraer el token de la cadena del encabezado
     $token = substr($authorizationHeader, 7); // "Bearer " tiene 7 caracteres
 
-    JwtAuth::$key = $_ENV['JWT_KEY'];
-    $result = JwtAuth::verifyToken($token);
+    JwtManager::$key = $_ENV['JWT_KEY'];
+    $result = JwtManager::verifyToken($token);
 
     // Verificar el resultado del token
     switch ($result['status']) {

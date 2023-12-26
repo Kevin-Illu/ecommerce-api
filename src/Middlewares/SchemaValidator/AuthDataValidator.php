@@ -1,5 +1,5 @@
 <?php
-namespace App\Middlewares;
+namespace App\Middlewares\SchemaValidator;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;

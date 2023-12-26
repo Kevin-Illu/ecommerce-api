@@ -4,34 +4,36 @@ namespace App\V1\Routes;
 use App\Controllers\ProductsController;
 
 require_once __DIR__ . '/../../../public/index.php';
-require_once __DIR__ . '/../../Middlewares/ProductsDataValidator.php';
-require_once __DIR__ . '/../../Middlewares/AuthMiddleware.php';
+
+// middlewares
+require_once __DIR__ . '/../../Middlewares/SchemaValidator/ProductsDataValidator.php';
+require_once __DIR__ . '/../../Middlewares/Jwt/JwtValidator.php';
 
 $baseRoute = "/api/v1";
 
 # get all products
 $app->get($baseRoute . '/products', ProductsController::class .':index')
-  ->add($jwtMiddleware);
+  ->add($jwtValidator);
 
 # get product by code
 $app->get($baseRoute . '/product/{code}', ProductsController::class . ':getProduct')
-  ->add($jwtMiddleware);
+  ->add($jwtValidator);
 
 # update product
 $app->put($baseRoute . '/product/{code}', ProductsController::class . ':updateProduct')
-  ->add($jwtMiddleware)
+  ->add($jwtValidator)
   ->add($validateUpdateProductData);
 
 # delete product
 $app->delete($baseRoute . '/product/{code}', ProductsController::class . ':deleteProduct')
-  ->add($jwtMiddleware);
+  ->add($jwtValidator);
 
 # add new product
 $app->post($baseRoute . '/product/add', ProductsController::class . ':addNewProduct')
-  ->add($jwtMiddleware)
+  ->add($jwtValidator)
   ->add($validateAddProductData);
 
 # get featured products
 $app->get($baseRoute . '/products/featured', ProductsController::class . ':getFeaturedProducts')
-  ->add($jwtMiddleware);
+  ->add($jwtValidator);
 

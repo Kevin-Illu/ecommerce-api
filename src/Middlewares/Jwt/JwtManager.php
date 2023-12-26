@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Middlewares;
+namespace App\Middlewares\Jwt;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use stdClass;
 
-class JwtAuth {
+class JwtManager {
   public static $key;
   private static $defaultAlgorithm = 'HS256';
 
