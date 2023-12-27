@@ -21,6 +21,7 @@ $container = $containerBuilder->build();
 
 AppFactory::setContainer($container);
 $app = AppFactory::create();
+$app->setBasePath('/apps/api/public');
 
 
 $app->addBodyParsingMiddleware();
