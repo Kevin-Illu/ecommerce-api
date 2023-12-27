@@ -123,7 +123,8 @@ class ProductsRepository {
     $queryBuilder = $this->db->getQueryBuilder();
     $queryBuilder->select('productCode, productName, productDescription, buyPrice, quantityInStock, productScale, productVendor, productLine, MSRP')
     ->from('products')
-    ->orderBy('buyPrice', 'ASC');
+    ->orderBy('buyPrice', 'ASC')
+    ->setMaxResults($limit);
 
     $results = $queryBuilder->executeQuery()->fetchAllAssociative();
     return $results;
